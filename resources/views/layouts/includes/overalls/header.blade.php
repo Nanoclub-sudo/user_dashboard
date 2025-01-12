@@ -4,113 +4,39 @@
 
             <!-- header rightbar icon -->
             <div class="h-right d-flex align-items-center mr-5 mr-lg-0 order-1">
-                <div class="d-flex">
-                    <a class="nav-link text-primary collapsed" href="help.html" title="Get Help">
-                        <i class="icofont-info-square fs-5"></i>
-                    </a>
-                    <div class="avatar-list avatar-list-stacked px-3">
-                        <img class="avatar rounded-circle" src="assets/images/xs/avatar2.jpg" alt="">
-                        <img class="avatar rounded-circle" src="assets/images/xs/avatar1.jpg" alt="">
-                        <img class="avatar rounded-circle" src="assets/images/xs/avatar3.jpg" alt="">
-                        <img class="avatar rounded-circle" src="assets/images/xs/avatar4.jpg" alt="">
-                        <img class="avatar rounded-circle" src="assets/images/xs/avatar7.jpg" alt="">
-                        <img class="avatar rounded-circle" src="assets/images/xs/avatar8.jpg" alt="">
-                        <span class="avatar rounded-circle text-center pointer" data-bs-toggle="modal" data-bs-target="#addUser"><i class="icofont-ui-add"></i></span>
-                    </div>
-                </div>
-                <div class="dropdown notifications zindex-popover">
-                    <a class="nav-link dropdown-toggle pulse" href="#" role="button" data-bs-toggle="dropdown">
-                        <i class="icofont-alarm fs-5"></i>
-                        <span class="pulse-ring"></span>
-                    </a>
-                    <div id="NotificationsDiv" class="dropdown-menu rounded-lg shadow border-0 dropdown-animation dropdown-menu-sm-end p-0 m-0">
-                        <div class="card border-0 w380">
-                            <div class="card-header border-0 p-3">
-                                <h5 class="mb-0 font-weight-light d-flex justify-content-between">
-                                    <span>Notifications</span>
-                                    <span class="badge text-white">14</span>
-                                </h5>
-                            </div>
-                            <div class="tab-content card-body">
-                                <div class="tab-pane fade show active">
-                                    <ul class="list-unstyled list mb-0">
-                                        <li class="py-2 mb-1 border-bottom">
-                                            <a href="javascript:void(0);" class="d-flex">
-                                                <img class="avatar rounded-circle" src="assets/images/xs/avatar1.jpg" alt="">
-                                                <div class="flex-fill ms-2">
-                                                    <p class="d-flex justify-content-between mb-0 "><span class="font-weight-bold">Molly Cornish</span> <small>2MIN</small></p>
-                                                    <span class="">Added  2021-02-19 e-Learn links_no_expiration_report.csv <span class="badge bg-success">Review</span></span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="py-2 mb-1 border-bottom">
-                                            <a href="javascript:void(0);" class="d-flex">
-                                                <div class="avatar rounded-circle no-thumbnail">DF</div>
-                                                <div class="flex-fill ms-2">
-                                                    <p class="d-flex justify-content-between mb-0 "><span class="font-weight-bold">Diane Fisher</span> <small>13MIN</small></p>
-                                                    <span class="">Server added Get Started with e-Learn.pdf</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="py-2 mb-1 border-bottom">
-                                            <a href="javascript:void(0);" class="d-flex">
-                                                <img class="avatar rounded-circle" src="assets/images/xs/avatar3.jpg" alt="">
-                                                <div class="flex-fill ms-2">
-                                                    <p class="d-flex justify-content-between mb-0 "><span class="font-weight-bold">Andrea Gill</span> <small>1HR</small></p>
-                                                    <span class="">Server added Document.docx</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="py-2 mb-1 border-bottom">
-                                            <a href="javascript:void(0);" class="d-flex">
-                                                <img class="avatar rounded-circle" src="assets/images/xs/avatar5.jpg" alt="">
-                                                <div class="flex-fill ms-2">
-                                                    <p class="d-flex justify-content-between mb-0 "><span class="font-weight-bold">Diane Fisher</span> <small>13MIN</small></p>
-                                                    <span class="">Add folder on Server</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="py-2 mb-1 border-bottom">
-                                            <a href="javascript:void(0);" class="d-flex">
-                                                <img class="avatar rounded-circle" src="assets/images/xs/avatar6.jpg" alt="">
-                                                <div class="flex-fill ms-2">
-                                                    <p class="d-flex justify-content-between mb-0 "><span class="font-weight-bold">Andrea Gill</span> <small>1HR</small></p>
-                                                    <span class="">Delete folder on Server</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="py-2">
-                                            <a href="javascript:void(0);" class="d-flex">
-                                                <img class="avatar rounded-circle" src="assets/images/xs/avatar7.jpg" alt="">
-                                                <div class="flex-fill ms-2">
-                                                    <p class="d-flex justify-content-between mb-0 "><span class="font-weight-bold">Zoe Wright</span> <small class="">1DAY</small></p>
-                                                    <span class="">The generated Lorem Ipsum</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <a class="card-footer text-center border-top-0" href="#"> View all notifications</a>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="d-flex">-->
+<!--                    <a class="nav-link text-primary collapsed" href="help.html" title="Get Help">-->
+<!--                        <i class="icofont-info-square fs-5"></i>-->
+<!--                    </a>-->
+<!--                    <div class="avatar-list avatar-list-stacked px-3">-->
+<!--                        <img class="avatar rounded-circle" src="assets/images/xs/avatar2.jpg" alt="">-->
+<!--                        <img class="avatar rounded-circle" src="assets/images/xs/avatar1.jpg" alt="">-->
+<!--                        <img class="avatar rounded-circle" src="assets/images/xs/avatar3.jpg" alt="">-->
+<!--                        <img class="avatar rounded-circle" src="assets/images/xs/avatar4.jpg" alt="">-->
+<!--                        <img class="avatar rounded-circle" src="assets/images/xs/avatar7.jpg" alt="">-->
+<!--                        <img class="avatar rounded-circle" src="assets/images/xs/avatar8.jpg" alt="">-->
+<!--                        <span class="avatar rounded-circle text-center pointer" data-bs-toggle="modal" data-bs-target="#addUser"><i class="icofont-ui-add"></i></span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                @include('layouts.includes.gadgets.notifications')
+
                 <div class="dropdown user-profile ml-2 ml-sm-3 d-flex align-items-center zindex-popover">
                     <div class="u-info me-2">
-                        <p class="mb-0 text-end line-height-sm "><span class="font-weight-bold">Molly Cornish</span></p>
+                        <p class="mb-0 text-end line-height-sm "><span class="font-weight-bold">{{ auth()->user()->fullName() }}</span></p>
                         <small>Student Profile</small>
                     </div>
                     <a class="nav-link dropdown-toggle pulse p-0" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static">
-                        <img class="avatar lg rounded-circle img-thumbnail" src="../dist/assets/images/profile_av.png" alt="profile">
+                        <img class="avatar lg rounded-circle img-thumbnail" src="/assets/img/profile.png" alt="profile">
                     </a>
                     <div class="dropdown-menu rounded-lg shadow border-0 dropdown-animation dropdown-menu-end p-0 m-0">
                         <div class="card border-0 w280">
                             <div class="card-body pb-0">
                                 <div class="d-flex py-1">
-                                    <img class="avatar rounded-circle" src="../dist/assets/images/profile_av.png" alt="profile">
+                                    <img class="avatar rounded-circle" src="/assets/images/profile_av.png" alt="profile">
                                     <div class="flex-fill ms-3">
-                                        <p class="mb-0"><span class="font-weight-bold">Molly Cornish</span></p>
-                                        <small class="">molly.cornish@gamil.com</small>
+                                        <p class="mb-0"><span class="font-weight-bold">{{ auth()->user()->fullName() }}</span></p>
+                                        <small class="">{{ auth()->user()->email }}</small>
                                     </div>
                                 </div>
                                 <div><hr class="dropdown-divider border-dark"></div>
