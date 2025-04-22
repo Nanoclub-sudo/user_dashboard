@@ -19,7 +19,7 @@
 <!--                    </div>-->
 <!--                </div>-->
 
-                @include('layouts.includes.gadgets.notifications')
+{{--                @include('layouts.includes.gadgets.notifications')--}}
 
                 <div class="dropdown user-profile ml-2 ml-sm-3 d-flex align-items-center zindex-popover">
                     <div class="u-info me-2">
@@ -33,7 +33,7 @@
                         <div class="card border-0 w280">
                             <div class="card-body pb-0">
                                 <div class="d-flex py-1">
-                                    <img class="avatar rounded-circle" src="/assets/images/profile_av.png" alt="profile">
+                                    <img class="avatar rounded-circle" src="/assets/img/profile.png" alt="profile">
                                     <div class="flex-fill ms-3">
                                         <p class="mb-0"><span class="font-weight-bold">{{ auth()->user()->fullName() }}</span></p>
                                         <small class="">{{ auth()->user()->email }}</small>
@@ -41,12 +41,29 @@
                                 </div>
                                 <div><hr class="dropdown-divider border-dark"></div>
                             </div>
-                            <div class="list-group m-2 ">
-                                <a href="students.html" class="list-group-item list-group-item-action border-0 "><i class="icofont-graduate-alt fs-6 me-3"></i>Student Profile</a>
-                                <a href="video-class.html" class="list-group-item list-group-item-action border-0 "><i class="icofont-black-board fs-6 me-3"></i>Video Class</a>
-                                <a href="../dist/ui-elements/auth-signin.html" class="list-group-item list-group-item-action border-0 "><i class="icofont-logout fs-6 me-3"></i>Signout</a>
+                            <div class="list-group m-2">
+                                <!-- User Profile -->
+                                <a href="{{ route('profile.index') }}" class="list-group-item list-group-item-action border-0">
+                                    <i class="icofont-graduate-alt fs-6 me-3"></i>Student Profile
+                                </a>
+
+                                <a href="{{ route('profile.settings') }}" class="list-group-item list-group-item-action border-0">
+                                    <i class="icofont-ui-settings fs-6 me-3"></i>Account Settings
+                                </a>
+
+                                <a href="{{ route('profile.notifications') }}" class="list-group-item list-group-item-action border-0">
+                                    <i class="icofont-bell fs-6 me-3"></i>Notifications
+                                </a>
+
+                                <a href="{{ route('profile.password.change') }}" class="list-group-item list-group-item-action border-0">
+                                    <i class="icofont-lock fs-6 me-3"></i>Change Password
+                                </a>
+
                                 <div><hr class="dropdown-divider border-dark"></div>
-                                <a href="../dist/ui-elements/auth-signup.html" class="list-group-item list-group-item-action border-0 "><i class="icofont-contact-add fs-5 me-3"></i>Add personal account</a>
+
+                                <a href="{{ route('logout') }}" class="list-group-item list-group-item-action border-0">
+                                    <i class="icofont-logout fs-6 me-3"></i>Signout
+                                </a>
                             </div>
                         </div>
                     </div>

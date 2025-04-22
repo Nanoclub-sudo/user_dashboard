@@ -13,10 +13,10 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-7 order-lg-1">
-                                        <h3 class=" mb-3">Welcome back, <span class="fw-bold">Molly</span></h3>
-                                        <p class="line-height-custom mb-0">Your Study Completed <span class="secondary-color">72%</span> of the tasks.</p>
-                                        <p class="line-height-custom">Progress is  <span class="secondary-color">Very good!</span></p>
-                                        <a class="btn bg-secondary text-light btn-lg lift" href="http://pixelwibes.com/" target="_blank">Free Inquire</a>
+                                        <h3 class=" mb-3">Welcome back, <span class="fw-bold">{{ auth()->user()->fname }}</span></h3>
+{{--                                        <p class="line-height-custom mb-0">Your Study Completed <span class="secondary-color">72%</span> of the tasks.</p>--}}
+{{--                                        <p class="line-height-custom">Progress is  <span class="secondary-color">Very good!</span></p>--}}
+{{--                                        <a class="btn bg-secondary text-light btn-lg lift" href="http://pixelwibes.com/" target="_blank">Free Inquire</a>--}}
                                     </div>
                                 </div>
                             </div>
