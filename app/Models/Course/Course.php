@@ -8,4 +8,9 @@ class Course extends Model
 {
     protected $table = 'courses';
     protected $guarded = [];
+
+    public function episodes()
+    {
+        return $this->hasMany(Episode::class, 'course_id');
+    }
 }

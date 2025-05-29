@@ -4,6 +4,7 @@
 <head>
     @include('layouts.init.head')
     <title>{{ env('APP_NAME') }}</title>
+    @yield('styles')
 </head>
 <body>
 
@@ -15,5 +16,6 @@
 </div>
 
 @include('layouts.init.scripts')
+@yield('scripts')
 </body>
 </html>

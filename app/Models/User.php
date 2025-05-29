@@ -6,47 +6,53 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use DB;
+use Str;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $guarded = [];
 
     public function fullName()
     {
         return $this->fname . " " . $this->lname;
+    }
+
+    public function member()
+    {
+        return $this->hasOne(Member::class, 'user_id');
+    }
+
+    public function getMemberAttribute()
+    {
+        return $this->member()->firstOrCreate([], [
+            'personal_code' => \Illuminate\Support\Str::uuid(),
+        ]);
+    }
+
+    public function setFnameAttribute($value)
+    {
+        $this->attributes['fname'] = ucfirst(strtolower($value));
+    }
+
+    public function setLnameAttribute($value)
+    {
+        $this->attributes['lname'] = ucfirst(strtolower($value));
+    }
+    public function settings()
+    {
+        return $this->hasOne(UserPrefer::class);
+    }
+
+    public function security()
+    {
+        return $this->hasOne(UserSecurity::class);
+    }
+
+    public function notificationsSettings()
+    {
+        return $this->hasOne(UserNotificationSetting::class);
     }
 }

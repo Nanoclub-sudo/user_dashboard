@@ -4,19 +4,16 @@
             <div class="col-md-12">
                 <div class="card border-0 mb-4 no-bg">
                     <div class="card-header py-3 px-0 d-flex align-items-center justify-content-between border-bottom">
-                        <h3 class=" fw-bold flex-fill">Registered Courses</h3>
+                        <h3 class=" fw-bold flex-fill">All Courses</h3>
                         @include('layouts.includes.filters.course_filter')
                     </div>
                 </div>
             </div>
         </div>
         <div class="row g-3 py-3">
-            @foreach($registeredCourses as $reg_crs)
-                @php
-                $course = \App\Models\Course\Course::find($reg_crs->course_id);
-                @endphp
+            @foreach($courses as $course)
                 <div class="col-lg-3 col-md-6 col-sm-6">
-                    @include('layouts.includes.sections.my_enrolls', ['course' => $course])
+                    @include('layouts.includes.sections.all_courses', ['course' => $course])
                 </div>
             @endforeach
         </div>

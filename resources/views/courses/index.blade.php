@@ -4,6 +4,6 @@
 <div class="main px-lg-4 px-md-4">
     @include('layouts.includes.overalls.header')
 
-    @include('layouts.includes.gadgets.enrollments')
+    @include('layouts.includes.gadgets.all')
 </div>
 @endsection

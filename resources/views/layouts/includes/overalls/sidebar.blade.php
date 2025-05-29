@@ -1,16 +1,27 @@
-<div class="sidebar px-4 py-4 py-md-4  me-0">
+<div class="sidebar px-4 py-4 py-md-4 me-0">
     <div class="d-flex flex-column h-100">
+
         @include('layouts.includes.gadgets.brand')
 
-        <!-- Menu: main ul -->
+        @php
+            $server = env('URL_ADMIN');
+            $fav = $bases['siteFavicon'] ?? '';
+            $fullFav = $server . "/" . $fav;
+        @endphp
+
+                <!-- Menu: main ul -->
         @include('layouts.includes.gadgets.menu')
 
-        <!-- Theme: Switch Theme -->
-        @include('layouts.includes.gadgets.switch-theme')
+        <!-- Logo at bottom -->
+        <div class="sidebar-logo-container mt-auto d-flex justify-content-center align-items-center py-3">
+            <a href="{{ env('URL_FRONT') }}" class="d-inline-block">
+                <img src="{{ $fullFav }}" alt="Site Logo" class="sidebar-logo-img" />
+            </a>
+        </div>
 
-        <!-- Menu: menu collepce btn -->
-        <button type="button" class="btn btn-link sidebar-mini-btn text-light">
-            <span class="ms-2"><i class="icofont-bubble-right"></i></span>
-        </button>
+        <!-- Theme: Switch Theme -->
+        {{-- @include('layouts.includes.gadgets.switch-theme') --}}
+
     </div>
 </div>
+

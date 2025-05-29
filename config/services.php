@@ -14,6 +14,11 @@ return [
     |
     */
 
+    'main_project' => [
+        'api_key' => env('MAIN_PROJECT_API_KEY'),
+        'base_url' => 'https://nanolympiad.org',
+    ],
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
