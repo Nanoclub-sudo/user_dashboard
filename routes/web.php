@@ -2,13 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Course\CourseController;
+use App\Http\Controllers\Profile\RepresentativeController;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Profile\ProfileMsgController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\UserAccessToken;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Middleware\ValidateUserToken;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CookieConsentController;
 
 Route::get('clientarea/login',function(){
     return redirect('/login');
@@ -106,6 +109,8 @@ Route::post('/do/login', function (Request $request) {
 })->name('login.do');
 
 Route::middleware([ValidateUserToken::class])->group(function () {
+    Route::get('/cookie-consent', [CookieConsentController::class, 'store'])->name('cookie.consent');
+
     Route::get('/', function () {
         $userCoursesCount = DB::table('course_registrations')->where('user_id',auth()->user()->id)->count();
         $coursesNum = DB::table('courses')->where('is_active',1)->count();
@@ -127,6 +132,15 @@ Route::middleware([ValidateUserToken::class])->group(function () {
         Route::get('/password', [ProfileController::class, 'password'])->name('password');
         Route::put('/change/password', [ProfileController::class, 'changePassword'])->name('change');
         Route::post('/logout', [ProfileController::class, 'logout'])->name('logout');
+
+        Route::group(['prefix' => 'messages', 'as' => 'msg.'], function () {
+            Route::get('/inbox', [ProfileMsgController::class, 'inbox'])->name('inbox');
+            Route::get('/compose', [ProfileMsgController::class, 'compose'])->name('send');
+            Route::post('/compose/submit', [ProfileMsgController::class, 'submitCompose'])->name('submit.compose');
+            Route::get('/sent', [ProfileMsgController::class, 'sent'])->name('sent');
+            Route::get('/show/{id}', [ProfileMsgController::class, 'show'])->name('show');
+            Route::get('/submit/reply/{id}', [ProfileMsgController::class, 'reply'])->name('reply');
+        });
     });
 
     Route::group(['prefix' => 'courses', 'as' => 'courses.'], function () {
@@ -136,6 +150,26 @@ Route::middleware([ValidateUserToken::class])->group(function () {
         Route::get('/progress', [CourseController::class, 'progress'])->name('progress');
     });
 
+    Route::group(['prefix' => 'rep', 'as' => 'rep.'], function () {
+        Route::get('/past', [RepresentativeController::class, 'past'])->name('past');
+
+        Route::get('/register', [RepresentativeController::class, 'register'])->name('reg');
+        Route::post('/register/submit', [RepresentativeController::class, 'doRegister'])->name('reg.submit');
+
+        Route::get('/registered_users', [RepresentativeController::class, 'allRegisteredUsers'])->name('reg.all');
+
+        Route::get('/bulk/excel', [RepresentativeController::class, 'bulkExcel'])->name('bulk-excel');
+        Route::post('/bulk/excel', [RepresentativeController::class, 'bulkExcelUpload'])->name('bulk-excel.upload');
+
+        Route::get('/bulk/bulk/text', [RepresentativeController::class, 'bulkText'])->name('bulk-text');
+        Route::post('/bulk//bulk/text/submit', [RepresentativeController::class, 'bulkTextSubmit'])->name('bulk-text.submit');
+
+        Route::get('/bulk/text', [RepresentativeController::class, 'bulkReferral'])->name('bulk-referral');
+        Route::post('/bulk/text/submit', [RepresentativeController::class, 'bulkReferralSubmit'])->name('bulk-referral.submit');
+
+        Route::get('/progress', [RepresentativeController::class, 'progress'])->name('progress');
+        Route::get('/stats', [RepresentativeController::class, 'stats'])->name('stats');
+    });
 
     Route::get('/logout', function () {
         \DB::table('user_access_tokens')->where('user_id',auth()->user()->id)->delete();

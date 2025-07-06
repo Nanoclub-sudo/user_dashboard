@@ -5,6 +5,25 @@
     @include('layouts.init.head')
     <title>{{ env('APP_NAME') }}</title>
     @yield('styles')
+    <style>
+        @keyframes pulse-ring {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.5);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+            }
+        }
+
+        .animate-unread {
+            animation: pulse-ring 2s infinite;
+            border-radius: 8px;
+        }
+
+    </style>
 </head>
 <body>
 

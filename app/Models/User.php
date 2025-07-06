@@ -28,8 +28,9 @@ class User extends Authenticatable
     public function getMemberAttribute()
     {
         return $this->member()->firstOrCreate([], [
-            'personal_code' => \Illuminate\Support\Str::uuid(),
+            'personal_code' => \Illuminate\Support\Str::uuid()
         ]);
+
     }
 
     public function setFnameAttribute($value)
@@ -55,4 +56,30 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserNotificationSetting::class);
     }
+
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    public function receivedMessages()
+    {
+        return $this->belongsToMany(Message::class, 'message_recipient')
+            ->withPivot('read') // include the read field from the pivot
+            ->withTimestamps()
+            ->orderBy('message_recipient.created_at', 'desc');
+    }
+
+
+    public function unreadMessages()
+    {
+        return $this->receivedMessages()->where('read', false);
+    }
+
+    public function unreadMessagesCount()
+    {
+        return $this->unreadMessages()->count();
+    }
+
+
 }

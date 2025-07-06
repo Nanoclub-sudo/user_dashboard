@@ -86,9 +86,10 @@
                            aria-label="Booklets">
                             Booklets
                         </a>
-                        <a href="#"
-                           class="btn btn-primary btn-sm w-100 disabled"
-                           aria-label="Sample Questions (Coming Soon)">
+                        <a href="https://nanolympiad.org/courses/sample-questions" target="_blank"
+                           class="btn btn-primary btn-sm w-100"
+                           rel="noopener noreferrer"
+                           aria-label="Sample Questions">
                             Sample Questions
                         </a>
                     </div>

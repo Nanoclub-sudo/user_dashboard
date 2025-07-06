@@ -6,11 +6,12 @@
     </li>
 
     <li class="collapsed auth-required" style="display: none;">
-        <a class="m-link profile-link {{ request()->is('profile*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-Profile" href="#">
+        <a class="m-link profile-link {{ request()->is('profile*') && !request()->is('profile/messages*') ? 'active' : '' }}"
+           data-bs-toggle="collapse" data-bs-target="#menu-Profile" href="#">
             <i class="icofont-user"></i><span>Profile</span>
             <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span>
         </a>
-        <ul class="sub-menu collapse {{ request()->is('profile*') ? 'show' : '' }}" id="menu-Profile">
+        <ul class="sub-menu collapse {{ request()->is('profile*') && !request()->is('profile/messages*') ? 'show' : '' }}" id="menu-Profile">
             <li>
                 <a class="ms-link profile-link {{ request()->routeIs('profile.index') ? 'active' : '' }}" href="{{ route('profile.index') }}">
                     <span>Overview</span>
@@ -44,6 +45,51 @@
         </ul>
     </li>
 
+    @php
+        use Illuminate\Support\Facades\DB;
+
+        $unreadCount = auth()->check()
+            ? DB::table('message_recipient')
+                ->where('user_id', auth()->id())
+                ->where('read', 0)
+                ->count()
+            : 0;
+
+        $messagesActive = request()->is('profile/messages*');
+    @endphp
+
+    <li class="collapsed auth-required" style="display: none;">
+        <a class="m-link profile-link {{ $messagesActive ? 'active' : '' }} {{ $unreadCount > 0 ? 'animate-unread' : '' }}"
+           data-bs-toggle="collapse" data-bs-target="#menu-Messages" href="#">
+            <i class="icofont-envelope"></i><span>Messages</span>
+            <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span>
+        </a>
+
+        <ul class="sub-menu collapse {{ $messagesActive ? 'show' : '' }}" id="menu-Messages">
+            <li>
+                <a class="ms-link profile-link {{ request()->routeIs('profile.msg.inbox') ? 'active' : '' }}"
+                   href="{{ route('profile.msg.inbox') }}">
+                    <span>Inbox</span>
+                    @if($unreadCount > 0)
+                        <span class="badge bg-danger ms-2">{{ $unreadCount }}</span>
+                    @endif
+                </a>
+            </li>
+            <li>
+                <a class="ms-link profile-link {{ request()->routeIs('profile.msg.sent') ? 'active' : '' }}"
+                   href="{{ route('profile.msg.sent') }}">
+                    <span>Sent</span>
+                </a>
+            </li>
+            <li>
+                <a class="ms-link profile-link {{ request()->routeIs('profile.msg.send') ? 'active' : '' }}"
+                   href="{{ route('profile.msg.send') }}">
+                    <span>Compose</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+
     <li class="collapsed auth-required" style="display: none;">
         <a class="m-link profile-link {{ request()->is('courses*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-Courses" href="#">
             <i class="icofont-certificate"></i><span>Courses</span>
@@ -60,7 +106,67 @@
         </ul>
     </li>
 
-{{--    <li class="collapsed auth-required" style="display: none;">--}}
+    <li class="collapsed auth-required" style="display: none;">
+        <a class="m-link profile-link {{ request()->is('rep*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-Rep" href="#">
+            <i class="icofont-users-alt-5"></i><span>User Control</span>
+            <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span>
+        </a>
+
+        <ul class="sub-menu collapse {{ request()->is('rep*') ? 'show' : '' }}" id="menu-Rep">
+
+            {{-- Manual Registration --}}
+            <li>
+                <a class="ms-link profile-link {{ request()->routeIs('rep.reg') ? 'active' : '' }}" href="{{ route('rep.reg') }}">
+                    <span>Register User</span>
+                </a>
+            </li>
+
+            {{-- My Registered Users --}}
+            <li>
+                <a class="ms-link profile-link {{ request()->routeIs('rep.reg-all') ? 'active' : '' }}" href="{{ route('rep.reg.all') }}">
+                    <span>My Registered Users</span>
+                </a>
+            </li>
+
+            {{-- Excel Upload --}}
+            <li>
+                <a class="ms-link profile-link {{ request()->routeIs('rep.bulk-excel') ? 'active' : '' }}" href="{{ route('rep.bulk-excel') }}">
+                    <span>Bulk Upload via Excel</span>
+                </a>
+            </li>
+
+            {{-- Copy-Paste Bulk Entry --}}
+            <li>
+                <a class="ms-link profile-link {{ request()->routeIs('rep.bulk-text') ? 'active' : '' }}" href="{{ route('rep.bulk-text') }}">
+                    <span>Bulk Text Registration</span>
+                </a>
+            </li>
+
+            {{-- Referral Link / Invite --}}
+            <li>
+                <a class="ms-link profile-link {{ request()->routeIs('rep.bulk-referral') ? 'active' : '' }}" href="{{ route('rep.bulk-referral') }}">
+                    <span>Invite via Referral Link</span>
+                </a>
+            </li>
+
+            {{-- Statistics & History --}}
+            <li>
+                <a class="ms-link profile-link {{ request()->routeIs('rep.stats') ? 'active' : '' }}" href="{{ route('rep.stats') }}">
+                    <span>Registration Stats</span>
+                </a>
+            </li>
+
+            {{-- Previously Registered Users --}}
+            <li>
+                <a class="ms-link profile-link {{ request()->routeIs('rep.past') ? 'active' : '' }}" href="">
+                    <span>Re-register Past Users</span>
+                </a>
+            </li>
+
+        </ul>
+    </li>
+
+    {{--    <li class="collapsed auth-required" style="display: none;">--}}
 {{--        <a class="m-link profile-link {{ request()->is('payments*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-Payments" href="#">--}}
 {{--            <i class="icofont-money"></i><span>Payments</span>--}}
 {{--            <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span>--}}
@@ -121,7 +227,7 @@
 
 
     <li class="auth-required" style="display: none;">
-        <a class="m-link" href="{{ env('URL_CLA_L0GOUT') }}">
+        <a class="m-link" href="{{ route('logout') }}">
             <i class="icofont-logout"></i> <span>Logout</span>
         </a>
     </li>

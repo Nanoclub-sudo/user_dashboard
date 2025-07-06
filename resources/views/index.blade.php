@@ -7,5 +7,7 @@
     @include('layouts.includes.gadgets.body')
 
     @include('layouts.includes.gadgets.modal-members')
+
+    @include('layouts.includes.gadgets.cookie-consent')
 </div>
 @endsection
