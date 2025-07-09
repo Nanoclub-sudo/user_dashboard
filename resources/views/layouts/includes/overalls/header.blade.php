@@ -1,9 +1,18 @@
 @php
+    use Illuminate\Support\Facades\DB;
+
     $avatarUrl = auth()->user()->avatar
         ? config('services.main_project.base_url', 'https://nanolympiad.org') . '/storage/' . auth()->user()->avatar
         : asset('images/avatar-placeholder.png');
 
     $token = request()->query('auth_token');
+
+    $unreadCount = auth()->check()
+        ? DB::table('message_recipient')
+            ->where('user_id', auth()->id())
+            ->where('read', 0)
+            ->count()
+        : 0;
 @endphp
 <div class="header">
     <nav class="navbar py-4">
@@ -11,7 +20,41 @@
 
             <!-- header rightbar icon -->
             <div class="h-right d-flex align-items-center mr-5 mr-lg-0 order-1">
-<!--                <div class="d-flex">-->
+                <!-- Messages Notification Dropdown -->
+                <div class="dropdown me-3 position-relative">
+                    <a class="nav-link dropdown-toggle {{ $unreadCount > 0 ? 'pulse' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="icofont-envelope fs-5"></i>
+                        @if($unreadCount > 0)
+                            <span class="pulse-ring"></span>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ $unreadCount }}
+                <span class="visually-hidden">unread messages</span>
+            </span>
+                        @endif
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-end shadow border-0 p-0 dropdown-animation" style="min-width: 300px;">
+                        <div class="card border-0">
+                            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                                <span>Messages</span>
+                                <a href="{{ route('profile.msg.inbox') }}" class="text-white small">View All</a>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                {{-- You can dynamically load unread messages here if desired --}}
+                                <li class="list-group-item text-muted text-center small">
+                                    @if ($unreadCount === 0)
+                                        No new messages
+                                    @else
+                                        You have {{ $unreadCount }} unread message{{ $unreadCount > 1 ? 's' : '' }}
+                                    @endif
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--                <div class="d-flex">-->
 <!--                    <a class="nav-link text-primary collapsed" href="help.html" title="Get Help">-->
 <!--                        <i class="icofont-info-square fs-5"></i>-->
 <!--                    </a>-->
